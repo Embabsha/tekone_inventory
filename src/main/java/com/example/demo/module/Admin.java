@@ -65,4 +65,8 @@ public class Admin {
     public String getPhone() {
         return phone.getValue();
     }
+
+    public void setAdminId(int adminId) {
+        this.adminId = new SimpleIntegerProperty(adminId);
+    }
 }

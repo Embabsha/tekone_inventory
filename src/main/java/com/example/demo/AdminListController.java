@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -40,9 +42,7 @@ private Button Back;
 @FXML private TableColumn<Admin,String> colPhone;
 
 
-public ObservableList<Admin> list = FXCollections.observableArrayList(
 
-);
 
 public void initialize()  {load();}
 
@@ -66,7 +66,25 @@ private void handleAdd(ActionEvent event) throws IOException{
 }
 @FXML
 private void handleDelete(ActionEvent event) throws IOException{
+    // Get the selected items from the table view
+    ObservableList<Admin> selectedItems = table.getSelectionModel().getSelectedItems();
 
+    // Iterate over the selected items and delete them from the database
+    for (Admin admin : selectedItems) {
+        String query = "DELETE FROM admin WHERE admin_id = ?";
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, admin.getAdminId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Refresh the table view
+    table.getItems().removeAll(selectedItems);
+    table.refresh();
 
     }
 @FXML

@@ -23,28 +23,40 @@ public class AdminCollection extends Application {
     }
     public AdminCollection(List<Admin> adminList){
     this.adminList = adminList ;
+    this.connection = DatabaseConnection.getInstance().getConnection();
+
 
     }
     public AdminCollection() {
         // Create a connection to the database
       this(new ArrayList<>());
+      this.connection = DatabaseConnection.getInstance().getConnection();
+
 
     }
 
-    public void createAdmin(Admin admin) {
+    public void addAdmin(Admin admin) {
         String query = "INSERT INTO admin (name, email, password, address, phone) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(2, admin.getName());
-            preparedStatement.setString(3, admin.getEmail());
-            preparedStatement.setString(4, admin.getPassword());
-            preparedStatement.setString(5, admin.getAddress());
-            preparedStatement.setString(6, admin.getPhone());
-            preparedStatement.executeUpdate();
+            preparedStatement.setString(1, admin.getName());
+            preparedStatement.setString(2, admin.getEmail());
+            preparedStatement.setString(3, admin.getPassword());
+            preparedStatement.setString(4, admin.getAddress());
+            preparedStatement.setString(5, admin.getPhone());
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            // get the auto-generated admin_id value
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int adminId = generatedKeys.getInt(1);
+                admin.setAdminId(adminId);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
 
 
