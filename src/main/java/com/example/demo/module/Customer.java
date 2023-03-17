@@ -7,25 +7,24 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.stage.Stage;
 
-public class Admin {
-    private IntegerProperty adminId;
+public class Customer  {
+    private IntegerProperty customerId;
     private StringProperty name;
     private StringProperty email;
     private StringProperty password;
     private StringProperty address;
     private StringProperty phone;
 
-    public Admin(int adminId, String name, String email, String password, String address, String phone) {
-        this.adminId = new SimpleIntegerProperty(adminId);
+    public Customer(int customerId, String name, String email, String password, String address, String phone) {
+        this.customerId = new SimpleIntegerProperty(customerId);
         this.name = new SimpleStringProperty(name);
         this.email = new SimpleStringProperty(email);
         this.password = new SimpleStringProperty(password);
         this.address = new SimpleStringProperty(address);
         this.phone = new SimpleStringProperty(phone);
     }
-
-    public SimpleIntegerProperty getAdminIdProperty() {
-        return new SimpleIntegerProperty(adminId.getValue()) ;
+    public SimpleIntegerProperty getCustomerIdProperty() {
+        return new SimpleIntegerProperty(customerId.getValue()) ;
     }
     public SimpleStringProperty getNameProperty() {
         return new SimpleStringProperty(name.getValue()) ;
@@ -42,11 +41,11 @@ public class Admin {
     public SimpleStringProperty getPhoneProperty() {
         return new SimpleStringProperty(phone.getValue()) ;
     }
-    public Integer getAdminId() {
-        return  adminId.getValue() ;
+    public Integer getCustomerId() {
+        return  customerId.getValue() ;
     }
-    public Admin getAdmin(){
-    return this ;
+    public Customer getCustomer(){
+        return this ;
     }
 
 
@@ -70,8 +69,8 @@ public class Admin {
         return phone.getValue();
     }
 
-    public void setAdminId(int adminId) {
-        this.adminId = new SimpleIntegerProperty(adminId);
+    public void setCustomerId(int customerId) {
+        this.customerId = new SimpleIntegerProperty(customerId);
     }
 
     public void setName(String name) {
@@ -94,3 +93,5 @@ public class Admin {
         this.phone.set(phone);
     }
 }
+
+

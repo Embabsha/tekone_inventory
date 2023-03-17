@@ -45,14 +45,14 @@
       </VBox>
       <ScrollPane layoutX="143.0" layoutY="5.0" prefHeight="393.0" prefWidth="456.0">
          <content>
-            <TableView>
+            <TableView fx:id="table">
                <columns>
-                  <TableColumn prefWidth="75.0" text="customer_id" />
-                  <TableColumn prefWidth="75.0" text="Name" />
-                  <TableColumn prefWidth="75.0" text="email" />
-                  <TableColumn prefWidth="75.0" text="password" />
-                  <TableColumn prefWidth="75.0" text="address" />
-                  <TableColumn prefWidth="75.0" text="phone" />
+                  <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="customer_id" />
+                  <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="colEmail" prefWidth="75.0" text="email" />
+                  <TableColumn fx:id="colPassword" prefWidth="75.0" text="password" />
+                  <TableColumn fx:id="colAddress" prefWidth="75.0" text="address" />
+                  <TableColumn fx:id="colPhone" prefWidth="75.0" text="phone" />
                </columns>
             </TableView>
          </content>

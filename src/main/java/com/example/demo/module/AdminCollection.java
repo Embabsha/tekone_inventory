@@ -7,20 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminCollection extends Application {
+public class AdminCollection {
 
     private Connection connection;
     private ResultSet resultSet;
     private Statement statement;
     private List<Admin> adminList;
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) {
-
-    }
     public AdminCollection(List<Admin> adminList){
     this.adminList = adminList ;
     this.connection = DatabaseConnection.getInstance().getConnection();
@@ -60,21 +53,7 @@ public class AdminCollection extends Application {
 
 
 
-    public Admin readAdmin(int admin_id) {
-        String query = "SELECT * FROM admin WHERE admin_id = ?";
-        Admin admin = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, admin_id);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                admin = new Admin(resultSet.getInt("admin_id"), resultSet.getString("name"), resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("address"), resultSet.getString("phone"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return admin;
-    }
+
     public List<Admin> getAllAdmins() {
 
 

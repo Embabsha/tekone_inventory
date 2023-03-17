@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -89,11 +90,15 @@ private void handleDelete(ActionEvent event) throws IOException{
     }
 @FXML
 private void handleUpdate(ActionEvent event) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateAdmin.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+    System.out.println(table.getSelectionModel().getSelectedItem());
+    final UpdateAdminController updateadmincontroller = new UpdateAdminController(table.getSelectionModel().getSelectedItem());
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateAdmin.fxml"));
+    fxmlLoader.setController(updateadmincontroller);
+    Parent root = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.setScene(new Scene(root));
+    stage.show();
 
     }
 
