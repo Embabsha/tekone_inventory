@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.StockListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ProductsController">
    <children>
       <VBox layoutX="14.0" layoutY="10.0" prefHeight="380.0" prefWidth="100.0">
          <children>
@@ -43,21 +43,20 @@
             </Button>
          </children>
       </VBox>
-      <ScrollPane layoutX="129.0" layoutY="4.0" prefHeight="394.0" prefWidth="468.0">
+      <ScrollPane layoutX="143.0" layoutY="5.0" prefHeight="393.0" prefWidth="456.0">
          <content>
-            <TableView prefHeight="548.0" prefWidth="754.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Product_id" />
-                <TableColumn prefWidth="75.0" text="Name" />
-                  <TableColumn prefWidth="75.0" text="Description" />
-                  <TableColumn prefWidth="75.0" text="Type" />
-                  <TableColumn prefWidth="75.0" text="Brand" />
-                  <TableColumn prefWidth="75.0" text="Year" />
-                  <TableColumn prefWidth="75.0" text="Quantity" />
-                  <TableColumn prefWidth="75.0" text="Price" />
-                  <TableColumn prefWidth="75.0" text="Image" />
-                  <TableColumn prefWidth="75.0" text="Admin_id" />
-              </columns>
+            <TableView fx:id="tableProducts">
+               <columns>
+                  <TableColumn fx:id="colProductId" prefWidth="75.0" text="Product_id" />
+                  <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="colDescription" prefWidth="75.0" text="Description" />
+                  <TableColumn fx:id="colType" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="colBrand" prefWidth="75.0" text="Brand" />
+                  <TableColumn fx:id="colYear" prefWidth="75.0" text="Year" />
+                  <TableColumn fx:id="colQuantity" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="colPrice" prefWidth="75.0" text="Price" />
+                  
+               </columns>
             </TableView>
          </content>
       </ScrollPane>

@@ -70,6 +70,7 @@ public class UpdateCustomerController {
         String phone = phoneField.getText();
         // create a new customer object with the updated data
         Customer updatedCustomer = new Customer(customer.getCustomerId(), name, email, password, address, phone);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Customer Updated");
         alert.setHeaderText(null);

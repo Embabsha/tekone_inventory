@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="orderIdLabel" layoutX="11.0" layoutY="169.0" prefHeight="31.0" prefWidth="173.0"/>
+      <ComboBox fx:id="statusComboBox" prefWidth="150" promptText="Select Status">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String>Delivered</String>
+            <String>Pending</String>
+            <String>Shipped</String>
+         </FXCollections>
+      </items>
+   </ComboBox>
+      <Button fx:id="back" layoutX="98.0" layoutY="360.0" mnemonicParsing="false" onAction="#handelBack" text="Button" />
+      <Button fx:id="update" layoutX="365.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleUpdate" text="Button" />
+   </children>
+</AnchorPane>

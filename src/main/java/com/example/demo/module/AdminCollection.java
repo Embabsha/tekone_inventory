@@ -61,7 +61,13 @@ public class AdminCollection {
             Connection connection = DatabaseConnection.getInstance().getConnection();
             resultSet = connection.createStatement().executeQuery("SELECT * FROM admin");
             while (resultSet.next()) {
-                Admin admin = new Admin(resultSet.getInt("admin_id"), resultSet.getString("name"), resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("address"), resultSet.getString("phone"));
+                Admin admin = new Admin(
+                        resultSet.getInt("admin_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("address"),
+                        resultSet.getString("phone"));
                 adminList.add(admin);
             }
         } catch (SQLException e) {

@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private Button stocks;
+    private Button products;
     @FXML
     private Button orders;
     @FXML
@@ -26,8 +26,8 @@ public class MainController implements Initializable {
     @FXML
     private Button customer;
     @FXML
-    private void handleStocks(ActionEvent event) throws Exception {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StocksList.fxml"));
+    private void handleProducts(ActionEvent event) throws Exception {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductsList.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

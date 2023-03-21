@@ -6,7 +6,7 @@
 <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainController">
    <children>
       <Button fx:id="menu" mnemonicParsing="false" onAction="#handleMenu" prefHeight="211.0" prefWidth="54.0" text="Menu" />
-      <Button fx:id="stocks" mnemonicParsing="false" onAction="#handleStocks" prefHeight="210.0" prefWidth="243.0" text="Stocks" />
+      <Button fx:id="products" mnemonicParsing="false" onAction="#handleProducts" prefHeight="210.0" prefWidth="243.0" text="Stocks" />
       <Button fx:id="customer" mnemonicParsing="false" onAction="#handleCustomer" prefHeight="212.0" prefWidth="246.0" text="Customer Info" />
       <Button fx:id="admin" mnemonicParsing="false" onAction="#handleAdmin" prefHeight="190.0" prefWidth="296.0" text="Admin Managment " />
       <Button fx:id="orders" mnemonicParsing="false" onAction="#handleOrders" prefHeight="188.0" prefWidth="248.0" text="Orders" />
