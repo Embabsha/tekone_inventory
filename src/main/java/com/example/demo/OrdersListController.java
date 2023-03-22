@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.module.Admin;
 import com.example.demo.module.Orders;
 import com.example.demo.module.OrdersCollection;
+import com.example.demo.module.Products;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -92,19 +94,27 @@ private void handleDelete(ActionEvent event) throws IOException{
 
 
 }
-@FXML
-public void handleUpdate() throws IOException {
-    final UpdateOrdersController updateorderscontroller = new UpdateOrdersController(table.getSelectionModel().getSelectedItem());
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateOrders.fxml"));
-    fxmlLoader.setController(updateorderscontroller);
-    Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
-    stage.initModality(Modality.APPLICATION_MODAL);
-    stage.setScene(new Scene(root));
-    stage.show();
+    @FXML
+    public void handleUpdate() throws IOException {
+        Orders selectedOrder = table.getSelectionModel().getSelectedItem();
+        if (selectedOrder == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No product selected");
+            alert.setContentText("Please select a product from the table.");
+            alert.showAndWait();
+            return;
+        }
+        final UpdateOrdersController updateOrdersController = new UpdateOrdersController(selectedOrder);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateOrders.fxml"));
+        fxmlLoader.setController(updateOrdersController);
+        Parent root =(Parent) fxmlLoader.load();
+        updateOrdersController.setTable(table);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.show();
 
-
-}
+    }
 
 
 

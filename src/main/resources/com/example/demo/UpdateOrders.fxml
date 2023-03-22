@@ -6,21 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="orderIdLabel" layoutX="11.0" layoutY="169.0" prefHeight="31.0" prefWidth="173.0"/>
-      <ComboBox fx:id="statusComboBox" prefWidth="150" promptText="Select Status">
-      <items>
-         <FXCollections fx:factory="observableArrayList">
-            <String>Delivered</String>
-            <String>Pending</String>
-            <String>Shipped</String>
-         </FXCollections>
-      </items>
-   </ComboBox>
-      <Button fx:id="back" layoutX="98.0" layoutY="360.0" mnemonicParsing="false" onAction="#handelBack" text="Button" />
-      <Button fx:id="update" layoutX="365.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleUpdate" text="Button" />
+      <Label fx:id="orderIdLabel" layoutX="15.0" layoutY="160.0" prefHeight="50.0" prefWidth="147.0" />
+      <ComboBox fx:id="statusComboBox" layoutX="253.0" layoutY="160.0" prefHeight="50.0" prefWidth="300.0" promptText=" Select Statues " />
+      <Button fx:id="back" layoutX="62.0" layoutY="340.0" mnemonicParsing="false" onAction="#handelBack" prefHeight="50.0" prefWidth="100.0" text="Back" />
+      <Button fx:id="update" layoutX="450.0" layoutY="340.0" mnemonicParsing="false" onAction="#handelUpdate" prefHeight="50.0" prefWidth="100.0" text="Update" />
    </children>
 </AnchorPane>

@@ -57,7 +57,7 @@ public class MainController implements Initializable {
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.showAndWait();
 
     }
     @FXML
@@ -66,7 +66,7 @@ public class MainController implements Initializable {
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.showAndWait();
 
     }
 

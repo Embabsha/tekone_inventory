@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.module.Orders;
 import com.example.demo.module.OrdersCollection;
+import com.example.demo.module.Products;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,13 +37,15 @@ public class UpdateOrdersController {
 
     @FXML
     private TableView<Orders> table;
-
+@FXML
+private TextField textInput;
     public UpdateOrdersController(Orders orders) {
         this.orders = orders;
     }
 
     public void initialize() {
-        statusComboBox.getItems().addAll("Pending", "Shipped", "Delivered");
+        statusComboBox.setItems(FXCollections.observableArrayList("Pending","Shipped","Delivered"));
+
 
         statusComboBox.setOnAction(event -> {
             // Get the selected order from your data model
@@ -58,6 +62,10 @@ public class UpdateOrdersController {
             }
         });
     }
+    public void setTable(TableView<Orders> table) {
+        this.table = table;
+    }
+
 
     private Orders getSelectedOrder() {
         // Get the selected order from the table view
@@ -71,46 +79,12 @@ public class UpdateOrdersController {
         return null;
     }
 
-    private void saveOrder(Orders order) throws IOException {
+    private void saveOrder(Orders orders) throws IOException {
         try {
             // Get a connection to the database
             Connection connection = DatabaseConnection.getInstance().getConnection();
             // Prepare a statement to update the order status in the database
-            PreparedStatement stmt = connection.prepareStatement("UPDATE orders SET status = ? WHERE order_id = ?");
-            stmt.setString(1, order.getStatues());
-            stmt.setInt(2, order.getOrderId());
-
-            // Execute the update statement
-            stmt.executeUpdate();
-
-            // Close the statement and the connection
-            stmt.close();
-            connection.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-
-    }
-
-    @FXML
-    private void handleBack(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrdersList.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-
-
-    }
-
-    @FXML
-    private void handleUpdate(ActionEvent event) {
-        try {
-            // Get a connection to the database
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            // Prepare a statement to update the order status in the database
-            PreparedStatement stmt = connection.prepareStatement("UPDATE orders SET status = ? WHERE order_id = ?");
+            PreparedStatement stmt = connection.prepareStatement("UPDATE orders SET statues = ? WHERE order_id = ?");
             stmt.setString(1, orders.getStatues());
             stmt.setInt(2, orders.getOrderId());
 
@@ -124,6 +98,39 @@ public class UpdateOrdersController {
             ex.printStackTrace();
         }
 
+
     }
+
+    @FXML
+    private void handelBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrdersList.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+
+    }
+
+    @FXML
+    private void handelUpdate(ActionEvent event) {
+        Orders selectedOrder = getSelectedOrder();
+        if (selectedOrder != null) {
+            // Update the status of the order
+            selectedOrder.setStatues(statusComboBox.getValue());
+            // Save the updated order to the database
+            try {
+                saveOrder(selectedOrder);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Statues Updated");
+        alert.setHeaderText(null);
+        alert.setContentText("The Statues has been Updated to the database.");
+        alert.showAndWait();
+    }
+
 }
 

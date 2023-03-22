@@ -42,28 +42,6 @@ public class OrdersCollection {
                 alert.showAndWait();
                 return;
             }
-           /**
-            // Check if customer exists in customers table
-            PreparedStatement customerStatement = connection.prepareStatement(customerQuery);
-            customerStatement.setInt(1, orders.getCustomerId());
-            ResultSet customerResult = customerStatement.executeQuery();
-
-            if (!customerResult.next()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Customer not found");
-                alert.showAndWait();
-                return;
-            }
-            PreparedStatement adminStatement = connection.prepareStatement(adminQuery);
-            adminStatement.setInt(1, orders.getAdminId());
-            ResultSet adminResult = adminStatement.executeQuery();
-            if(!adminResult.next()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Admin not found");
-                alert.showAndWait();
-                return;
-            }
-*/
 
             // Calculate order total
             double price = productResult.getDouble("price");
@@ -110,7 +88,7 @@ public class OrdersCollection {
         }
         return ordersList;
     }
-
+/**
     public void updateOrders(Orders orders) {
         String query = "UPDATE orders SET customer_id = ?, quantity = ?, total = ? WHERE order_id = ?";
         try {
@@ -124,6 +102,7 @@ public class OrdersCollection {
             e.printStackTrace();
         }
     }
+    */
 
 
     public void deleteOrders(int order_id) {

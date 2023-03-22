@@ -52,10 +52,18 @@ private void handleAdd(ActionEvent event) throws IOException, SQLException {
     int adminId =Integer.parseInt(adminIdField.getText());
     Double total= Double.parseDouble(totalField.getText());
 
+    if (!statues.equals("shipped") && !statues.equals("delivered") && !statues.equals("pending")) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Invalid Statues");
+        alert.setHeaderText(null);
+        alert.setContentText("The statues entered is not valid. Please enter either 'shipped', 'delivered', or 'pending'.");
+        alert.showAndWait();
+        return;
+    }
 // Check if product exists in products table
     String productQuery = "SELECT * FROM product WHERE product_id = ?";
 
-    ;
+
     try {
         PreparedStatement productStatement = connection.prepareStatement(productQuery);
         productStatement.setInt(1, productId);
@@ -121,6 +129,7 @@ private void handleAdd(ActionEvent event) throws IOException, SQLException {
         e.printStackTrace();
         return;
     }
+
 
 
 

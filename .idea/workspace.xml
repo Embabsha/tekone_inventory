@@ -4,35 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba3174a5-f63a-4938-aa41-6eb096fe84e3" name="Changes" comment="completed the customer side completely adn fixed some part in the admin adn add some functions">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/AddProductsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/ProductsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateOrdersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateProductsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/Orders.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/OrdersCollection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/Products.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/ProductsCollection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/UpdateOrders.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestUpdateProduct.java" afterDir="false" />
+    <list default="true" id="ba3174a5-f63a-4938-aa41-6eb096fe84e3" name="Changes" comment="updates on the product side and the orders side">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AddOrdersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/AddOrdersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AddProductController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MenuListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MenuListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/OrdersListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/OrdersListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/StockListController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateCustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateProductController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/AdminCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/AdminCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/AddOrders.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/AddOrders.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/AddProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/AddProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateOrdersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateOrdersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/OrdersCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/OrdersCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/MenuList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/MenuList.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/OrdersList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/OrdersList.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/StocksList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/ProductsList.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/UpdateProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/UpdateProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/UpdateOrders.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/UpdateOrders.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679082685772</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updates on the product side and the orders side">
+      <created>1679437906391</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679437906391</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -160,6 +148,7 @@
     <MESSAGE value="main_change" />
     <MESSAGE value="adding admins  works fully and deleting info works as well" />
     <MESSAGE value="completed the customer side completely adn fixed some part in the admin adn add some functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="completed the customer side completely adn fixed some part in the admin adn add some functions" />
+    <MESSAGE value="updates on the product side and the orders side" />
+    <option name="LAST_COMMIT_MESSAGE" value="updates on the product side and the orders side" />
   </component>
 </project>
