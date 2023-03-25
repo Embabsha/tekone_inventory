@@ -4,19 +4,21 @@ import com.example.demo.module.AdminCollection;
 import com.example.demo.module.Orders;
 import com.example.demo.module.OrdersCollection;
 import javafx.event.ActionEvent;
+import java.time.LocalDate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.util.Date;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -51,6 +53,7 @@ private void handleAdd(ActionEvent event) throws IOException, SQLException {
     int quantity = Integer.parseInt(quantityField.getText());
     int adminId =Integer.parseInt(adminIdField.getText());
     Double total= Double.parseDouble(totalField.getText());
+    Date date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
     if (!statues.equals("shipped") && !statues.equals("delivered") && !statues.equals("pending")) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -81,12 +84,6 @@ private void handleAdd(ActionEvent event) throws IOException, SQLException {
         e.printStackTrace();
         return;
     }
-
-
-
-
-
-
 
 // Check if customer exists in customers table
     String customerQuery = "SELECT * FROM customers WHERE customer_id = ?";
@@ -130,10 +127,7 @@ private void handleAdd(ActionEvent event) throws IOException, SQLException {
         return;
     }
 
-
-
-
-    Orders orders = new Orders(0, productId, customerId, quantity, total, statues, adminId);
+    Orders orders = new Orders(0, productId, customerId, quantity, total, statues, adminId, date);
 
     ordersCollection.addOrders(orders);
 

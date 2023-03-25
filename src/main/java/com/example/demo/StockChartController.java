@@ -1,46 +1,44 @@
 package com.example.demo;
 
-import com.example.demo.module.Orders;
-import com.example.demo.module.OrdersCollection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.*;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class MenuListController {
+public class StockChartController {
 
 
     @FXML
     private Button Back;
-    @FXML private Button stock;
-    @FXML
-    private NumberAxis caOrders;
+    @FXML private Button ordersList;
+    @FXML private Button customerList;
+    @FXML private NumberAxis caOrders;
     @FXML
     private CategoryAxis caProducts;
     @FXML
     private BarChart<String, Number> barChart;
-
-    // private ObservableList<XYChart.Data<String, Integer>> chartData = FXCollections.observableArrayList();
     private Connection connection;
     private ResultSet resultSet;
+
+
 
 
 
@@ -50,24 +48,23 @@ public class MenuListController {
             this.connection = DatabaseConnection.getInstance().getConnection();
 
             // Execute a query to get the data
-            resultSet = connection.createStatement().executeQuery("SELECT product_id, SUM(quantity) as totalQuantity FROM orders GROUP BY product_id");
+            resultSet = connection.createStatement().executeQuery("SELECT product_id, SUM(quantity) as totalQuantity FROM product GROUP BY product_id");
 
             // Create an observable list to hold the data for the bar chart
             ObservableList<XYChart.Data<String, Number>> barChartData = FXCollections.observableArrayList();
             // Create a bar chart using the observable list of data
-            barChart.setTitle("Ordered Products Quantities");
+            barChart.setTitle("Products Quantities");
             caProducts.setLabel("Product ID");
-            caOrders.setLabel("Orders");
-            barChart.setData(FXCollections.observableArrayList(new XYChart.Series<>("Orders", barChartData)));
-
+            caOrders.setLabel("Quantity");
+            barChart.setData(FXCollections.observableArrayList(new XYChart.Series<>("Quantities", barChartData)));
 
             // Iterate through the result set and add the data to the observable list
             while (resultSet.next()) {
                 String productId = resultSet.getString("product_id");
                 int quantity = resultSet.getInt("totalQuantity");
                 XYChart.Data<String, Number> data = new XYChart.Data<>(productId, quantity);
-                data.setNode(new HoveredThresholdNode(productId, quantity));
-                data.getNode().setStyle("-fx-bar-fill: #FFD600;");
+                data.setNode(new StockChartController.HoveredThresholdNode(productId, quantity));
+                data.getNode().setStyle("-fx-bar-fill: #7FFF00;");
                 barChartData.add(data);
             }
 
@@ -86,8 +83,8 @@ public class MenuListController {
     }
 
     @FXML
-    private  void handelStock(ActionEvent event) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StockChart.fxml"));
+    private  void handelOrders(ActionEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuList.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -103,7 +100,6 @@ public class MenuListController {
         stage.show();
 
     }
-
     class HoveredThresholdNode extends StackPane {
         HoveredThresholdNode(String productId, int quantity) {
             setPrefSize(15, 15);
@@ -132,11 +128,7 @@ public class MenuListController {
             // set the y-coordinate of the label to be slightly above the top of the bar
             label.setLayoutX(boundsInParent.getMinX() + boundsInParent.getWidth() / 2 - label.getWidth() / 2);
             label.setLayoutY(boundsInParent.getMinY() - label.getHeight() - 10);
-             return label;
+            return label;
         }
     }
-
-
-
-
 }

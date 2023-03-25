@@ -5,10 +5,11 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CustomerListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CustomerListController">
    <children>
       <VBox layoutX="14.0" layoutY="10.0" prefHeight="380.0" prefWidth="100.0">
          <children>
@@ -57,5 +58,7 @@
             </TableView>
          </content>
       </ScrollPane>
+      <Button fx:id="search" layoutX="767.0" layoutY="10.0" mnemonicParsing="false" onAction="#handelSearch" prefHeight="25.0" prefWidth="60.0" text="Search" />
+      <TextField fx:id="searchField" layoutX="601.0" layoutY="10.0" />
    </children>
 </AnchorPane>

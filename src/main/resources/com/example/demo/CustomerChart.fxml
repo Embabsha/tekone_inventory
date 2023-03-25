@@ -9,9 +9,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MenuListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CustomerChartController">
    <children>
-      <Button fx:id="stock" layoutX="4.0" layoutY="150.0" mnemonicParsing="false" onAction="#handelStock" prefHeight="32.0" prefWidth="98.0" text="StockList" />
+      <Button fx:id="ordersList" layoutX="4.0" layoutY="150.0" mnemonicParsing="false" onAction="#handelOrders" prefHeight="32.0" prefWidth="98.0" text="OrderList">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></Button>
       <Label alignment="CENTER" layoutY="7.0" prefHeight="56.0" prefWidth="600.0" text="Bar Chart ">
          <font>
             <Font size="30.0" />
@@ -25,8 +28,11 @@
           <NumberAxis fx:id="caOrders" label="Orders" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button fx:id="back" layoutX="4.0" layoutY="350.0" mnemonicParsing="false" onAction="#handelBack" prefHeight="32.0" prefWidth="98.0" text="Back" />
-      <Button fx:id="customersList" layoutX="4.0" layoutY="250.0" mnemonicParsing="false" onAction="#handelCustomers" prefHeight="32.0" prefWidth="98.0" text="CustomerList">
+      <Button fx:id="back" layoutX="4.0" layoutY="350.0" mnemonicParsing="false" onAction="#handelBack" prefHeight="32.0" prefWidth="98.0" text="Back">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></Button>
+      <Button fx:id="stockList" layoutX="4.0" layoutY="250.0" mnemonicParsing="false" onAction="#handelStock" prefHeight="32.0" prefWidth="98.0" text="StockList">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>

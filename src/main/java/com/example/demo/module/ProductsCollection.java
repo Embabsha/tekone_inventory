@@ -2,7 +2,7 @@ package com.example.demo.module;
 
 import com.example.demo.DatabaseConnection;
 import javafx.scene.control.TableView;
-
+import javafx.scene.control.TextField;
 
 
 import java.sql.*;
@@ -108,9 +108,72 @@ public class ProductsCollection {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("SQL error here");
+
         }
     }
+
+    public List<Products> searchProducts(TextField keyword) {
+        List<Products> searchResults = new ArrayList<>();
+        String query = "SELECT * FROM product WHERE  product_id LIKE ? OR name LIKE ? OR description LIKE ?  OR type LIKE ? OR brand LIKE ? OR price LIKE ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String value = "%" + keyword.getText() + "%";
+            preparedStatement.setString(1, value);
+            preparedStatement.setString(2, value);
+            preparedStatement.setString(3, value);
+            preparedStatement.setString(4, value);
+            preparedStatement.setString(5, value);
+            preparedStatement.setString(6, value);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Products products = new Products(
+                        resultSet.getInt("product_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        resultSet.getString("type"),
+                        resultSet.getString("brand"),
+                        resultSet.getDouble("year"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getDouble("price")
+                        //image
+                );
+                searchResults.add(products);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
+    }
+
+
+    public List<Products> filterProductsByBrand(String brand) {
+        List<Products> filteredProducts = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM product WHERE brand=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, brand);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Products products = new Products (
+                        resultSet.getInt("product_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        resultSet.getString("type"),
+                        resultSet.getString("brand"),
+                        resultSet.getDouble("year"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getDouble("price")
+                );
+                filteredProducts.add(products);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return filteredProducts;
+    }
+
+
+
 
 
 

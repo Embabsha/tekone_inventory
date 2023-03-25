@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -50,7 +51,7 @@ public class CustomerListController {
     private TableColumn<Customer, String> colAddress;
     @FXML
     private TableColumn<Customer, String> colPhone;
-
+    @FXML private TextField searchField;
     public void initialize() {
         load();
     }
@@ -62,6 +63,14 @@ public class CustomerListController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void handelSearch(ActionEvent event) throws IOException{
+        CustomersCollection customersCollection = new CustomersCollection();
+        ArrayList<Customer> customers = new ArrayList<>(customersCollection.searchCustomer(searchField));
+        ObservableList<Customer> data = FXCollections.observableArrayList(customers);
+        table.setItems(data);
+
     }
 
     @FXML

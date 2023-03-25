@@ -2,13 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ProductsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ProductsController">
    <children>
       <VBox layoutX="14.0" layoutY="10.0" prefHeight="380.0" prefWidth="100.0">
          <children>
@@ -45,7 +47,7 @@
       </VBox>
       <ScrollPane layoutX="143.0" layoutY="5.0" prefHeight="393.0" prefWidth="456.0">
          <content>
-            <TableView fx:id="tableProducts">
+            <TableView fx:id="tableProducts" prefHeight="400.0" prefWidth="607.0">
                <columns>
                   <TableColumn fx:id="colProductId" prefWidth="75.0" text="Product_id" />
                   <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
@@ -60,5 +62,8 @@
             </TableView>
          </content>
       </ScrollPane>
+      <TextField fx:id="searchField" layoutX="626.0" layoutY="11.0" prefHeight="26.0" prefWidth="183.0" />
+      <Button fx:id="search" layoutX="821.0" layoutY="12.0" mnemonicParsing="false" onAction="#handelSearch" prefHeight="26.0" prefWidth="63.0" text="Search" />
+      <ComboBox fx:id="filter" layoutX="626.0" layoutY="50.0" onAction="#handleFilterByStatus" prefWidth="200.0" promptText="Filter Brand:" />
    </children>
 </AnchorPane>

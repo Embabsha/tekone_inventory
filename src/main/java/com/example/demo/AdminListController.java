@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.module.Admin;
 import com.example.demo.module.AdminCollection;
+import com.example.demo.module.Products;
+import com.example.demo.module.ProductsCollection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -41,7 +44,7 @@ private Button Back;
 @FXML private TableColumn<Admin,String> colPassword;
 @FXML private TableColumn<Admin,String> colAddress;
 @FXML private TableColumn<Admin,String> colPhone;
-
+@FXML private TextField searchField;
 
 
 
@@ -55,6 +58,14 @@ private void handleBack(ActionEvent event ) throws IOException {
     stage.setScene(new Scene(root));
     stage.show();
 }
+    public void handelSearch(ActionEvent event) throws IOException{
+        AdminCollection adminCollection = new AdminCollection();
+        ArrayList<Admin> admins = new ArrayList<>(adminCollection.searchAdmin(searchField));
+        ObservableList<Admin> data = FXCollections.observableArrayList(admins);
+        table.setItems(data);
+
+    }
+
 
 @FXML
 private void handleAdd(ActionEvent event) throws IOException{

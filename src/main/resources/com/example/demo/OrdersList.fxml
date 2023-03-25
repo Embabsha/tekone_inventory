@@ -2,13 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.OrdersListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.OrdersListController">
    <children>
       <VBox layoutX="14.0" layoutY="10.0" prefHeight="380.0" prefWidth="100.0">
          <children>
@@ -42,7 +44,7 @@
       </VBox>
       <ScrollPane layoutX="143.0" layoutY="5.0" prefHeight="393.0" prefWidth="456.0">
          <content>
-            <TableView fx:id="table">
+            <TableView fx:id="table" prefHeight="400.0" prefWidth="619.0">
                <columns>
                   <TableColumn fx:id="colOrderId" prefWidth="75.0" text="order_id" />
                   <TableColumn fx:id="colProductId" prefWidth="75.0" text="Product_id" />
@@ -51,9 +53,14 @@
                   <TableColumn fx:id="colTotal" prefWidth="75.0" text="Total" />
                   <TableColumn fx:id="colStatues" prefWidth="75.0" text="Statues" />
                   <TableColumn fx:id="colAdminId" prefWidth="75.0" text="Admin_id" />
+                  <TableColumn fx:id="colDate" prefWidth="90.0" text="Date" />
                </columns>
             </TableView>
          </content>
       </ScrollPane>
+      <Button fx:id="search" layoutX="776.0" layoutY="10.0" mnemonicParsing="false" onAction="#handelSearch" prefHeight="25.0" prefWidth="110.0" text="Search" />
+      <TextField fx:id="searchField" layoutX="610.0" layoutY="10.0" prefHeight="25.0" />
+      <ComboBox fx:id="filter" layoutX="611.0" layoutY="45.0" onAction="#handleFilterByStatus" prefWidth="150.0" promptText="Filter" />
+      <ComboBox fx:id="sort" layoutX="776.0" layoutY="45.0" onAction="#handelSortByDate" prefHeight="26.0" prefWidth="110.0" promptText="Sort" />
    </children>
 </AnchorPane>

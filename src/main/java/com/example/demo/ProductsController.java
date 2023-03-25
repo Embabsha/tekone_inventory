@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.module.Admin;
+import com.example.demo.module.Orders;
 import com.example.demo.module.Products;
 import com.example.demo.module.ProductsCollection;
 import javafx.collections.FXCollections;
@@ -10,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
@@ -22,8 +20,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductsController {
     @FXML
@@ -34,6 +34,7 @@ public class ProductsController {
     private Button update;
     @FXML
     private Button Back;
+
     @FXML
     private TableView<Products> tableProducts;
     @FXML private TableColumn<Products, Integer> colProductId;
@@ -46,10 +47,50 @@ public class ProductsController {
     @FXML private TableColumn<Products, Double> colPrice;
     //@FXML private TableColumn<Products, ImageView> colImage;
     //@FXML private ImageView productImage;
+    @FXML private  Button search;
+    @FXML private TextField searchField;
+    @FXML private ComboBox filter;
+    Connection connection;
+    ProductsCollection productsCollection = new ProductsCollection();
+
+    public void initialize() throws SQLException { load();
+        this.connection = DatabaseConnection.getInstance().getConnection();
+        String query = "SELECT DISTINCT brand FROM product";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        ArrayList<String> brandList = new ArrayList<>();
+        while (resultSet.next()) {
+            String brand = resultSet.getString("brand");
+            brandList.add(brand);
+        }
+        ObservableList<String> observableBrandList = FXCollections.observableArrayList("All");
+        observableBrandList.addAll(brandList);
+        filter.setItems(observableBrandList);
+
+    }
+
+    public void handleFilterByStatus(ActionEvent event) {
+        String brand = (String) filter.getValue();
+        List<Products> filteredProducts;
+        if (brand.equals("All")) {
+            filteredProducts = productsCollection.getAllProducts();
+        } else {
+            filteredProducts = productsCollection.filterProductsByBrand(brand);
+        }
+        ObservableList<Products> data = FXCollections.observableArrayList(filteredProducts);
+        tableProducts.setItems(data);
+
+    }
 
 
-    public void initialize(){ load();}
+    public void handelSearch(ActionEvent event) throws IOException{
+        ProductsCollection productsCollection = new ProductsCollection();
+        ArrayList<Products> products = new ArrayList<>(productsCollection.searchProducts(searchField));
+        ObservableList<Products> data = FXCollections.observableArrayList(products);
+        tableProducts.setItems(data);
 
+    }
     @FXML
     private void handleBack(ActionEvent event ) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));

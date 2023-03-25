@@ -2,6 +2,7 @@ package com.example.demo.module;
 
 import com.example.demo.DatabaseConnection;
 import javafx.application.Application;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.*;
@@ -92,7 +93,36 @@ public class CustomersCollection  {
                 e.printStackTrace();
             }
         }
+
+    public List<Customer> searchCustomer(TextField keyword) {
+        List<Customer> searchResults = new ArrayList<>();
+        String query = "SELECT * FROM customer WHERE  customer_id LIKE ? OR name LIKE ? OR email LIKE ? OR address LIKE ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String value = "%" + keyword.getText() + "%";
+            preparedStatement.setString(1, value);
+            preparedStatement.setString(2, value);
+            preparedStatement.setString(3, value);
+            preparedStatement.setString(4, value);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Customer customer  = new Customer(
+                        resultSet.getInt("customer_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("address"),
+                        resultSet.getString("phone")
+                );
+                searchResults.add(customer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
     }
+
+}
 
 
 

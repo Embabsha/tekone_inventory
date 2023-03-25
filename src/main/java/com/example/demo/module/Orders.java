@@ -2,8 +2,10 @@ package com.example.demo.module;
 
 import javafx.beans.property.*;
 
-public class Orders {
+import java.util.Date;
 
+
+public class Orders {
     private IntegerProperty orderId;
     private IntegerProperty productId;
     private IntegerProperty customerId;
@@ -11,7 +13,9 @@ public class Orders {
     private SimpleDoubleProperty total;
     private IntegerProperty adminId;
     private StringProperty statues;
-    public Orders(int orderId, int productId, int customerId, int quantity, double total,String statues,int adminId) {
+    private ObjectProperty<Date> date;
+
+    public Orders(int orderId, int productId, int customerId, int quantity, double total, String statues, int adminId, Date date) {
         this.orderId = new SimpleIntegerProperty(orderId);
         this.productId = new SimpleIntegerProperty(productId);
         this.customerId = new SimpleIntegerProperty(customerId);
@@ -19,16 +23,17 @@ public class Orders {
         this.total = new SimpleDoubleProperty(total);
         this.statues = new SimpleStringProperty(statues);
         this.adminId = new SimpleIntegerProperty(adminId);
+        this.date = new SimpleObjectProperty<>(date);
     }
 
-    public SimpleIntegerProperty getOrderIdProperty(){return new SimpleIntegerProperty(orderId.getValue());}
-    public SimpleIntegerProperty getProductIdProperty(){return new SimpleIntegerProperty(productId.getValue());}
-    public SimpleIntegerProperty getCustomerIdProperty(){return new SimpleIntegerProperty(customerId.getValue());}
-    public SimpleIntegerProperty getQuantityProperty(){return new SimpleIntegerProperty(quantity.getValue());}
-    public SimpleDoubleProperty getTotalProperty(){return new SimpleDoubleProperty(total.getValue());}
-
-    public SimpleStringProperty getStatuesProperty(){return new SimpleStringProperty(statues.getValue());}
-    public SimpleIntegerProperty getAdminIdProperty(){return new SimpleIntegerProperty(adminId.getValue());}
+    public IntegerProperty getOrderIdProperty() { return orderId; }
+    public IntegerProperty getProductIdProperty() { return productId; }
+    public IntegerProperty getCustomerIdProperty() { return customerId; }
+    public IntegerProperty getQuantityProperty() { return quantity; }
+    public SimpleDoubleProperty getTotalProperty() { return total; }
+    public StringProperty getStatuesProperty() { return statues; }
+    public IntegerProperty getAdminIdProperty() { return adminId; }
+    public ObjectProperty<Date> getDateProperty() { return date;}
 
     public String getStatues(){return statues.getValue();}
     public void setStatues(String statues){this.statues.set(statues);}
@@ -45,5 +50,8 @@ public class Orders {
     public Integer getAdminId() {return  adminId.getValue() ;}
     public void setAdminId(int adminId){ this.adminId.set(adminId); }
 
+    public Date getDate() {return date.getValue();}
+
+    public void setDate(Date date) {this.date.set(date);}
 
 }

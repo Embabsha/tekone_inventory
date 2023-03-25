@@ -1,9 +1,9 @@
 package com.example.demo;
 
-import com.example.demo.module.Admin;
-import com.example.demo.module.Orders;
-import com.example.demo.module.OrdersCollection;
-import com.example.demo.module.Products;
+import com.example.demo.module.*;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -22,7 +19,12 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 public class OrdersListController  {
 @FXML
@@ -43,10 +45,18 @@ private Button Back;
     @FXML private TableColumn<Orders,Integer> colQuantity;
     @FXML private TableColumn<Orders,Double> colTotal;
     @FXML private TableColumn<Orders,String> colStatues;
+    @FXML private TableColumn<Orders, Date> colDate;
+    @FXML private TextField searchField;
+    @FXML private  ComboBox filter ;
+    @FXML private ComboBox sort;
 
+    OrdersCollection ordersCollection = new OrdersCollection();
+    public void initialize()  {load();
 
-
-    public void initialize()  {load();}
+        filter.setItems(FXCollections.observableArrayList("Pending","Shipped","Delivered"));
+        sort.setItems(FXCollections.observableArrayList("Newest","Oldest"));
+        sort.setValue("Newest");
+    }
 
 
 @FXML
@@ -59,6 +69,31 @@ private void handleBack(ActionEvent event ) throws IOException {
 
 
 }
+    public void handelSortByDate(ActionEvent event){
+        sort.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.equals("Newest")) {
+                // Sort by newest date
+                table.getItems().sort(Comparator.comparing(Orders::getDate).reversed());
+            } else if(newValue.equals("Oldest")) {
+                // Sort by oldest date
+                table.getItems().sort(Comparator.comparing(Orders::getDate));
+            }
+        });
+
+    }
+    public void handleFilterByStatus(ActionEvent event) {
+        String statues = (String) filter.getValue(); // get the selected status from the combo box
+        List<Orders> filteredOrders = ordersCollection.filterOrdersByStatus(statues);
+        ObservableList<Orders> data = FXCollections.observableArrayList(filteredOrders);
+        table.setItems(data);
+    }
+    public void handelSearch(ActionEvent event) throws IOException{
+        OrdersCollection ordersCollection = new OrdersCollection();
+        ArrayList<Orders> orders = new ArrayList<>(ordersCollection.searchOrders(searchField));
+        ObservableList<Orders> data = FXCollections.observableArrayList(orders);
+        table.setItems(data);
+
+    }
 
 
 @FXML
@@ -127,6 +162,11 @@ private void handleDelete(ActionEvent event) throws IOException{
         colQuantity.setCellValueFactory(cell -> cell.getValue().getQuantityProperty().asObject());
         colTotal.setCellValueFactory(cell -> cell.getValue().getTotalProperty().asObject());
         colStatues.setCellValueFactory(cell -> cell.getValue().getStatuesProperty());
+        colDate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+
+
+
+
 
 
 

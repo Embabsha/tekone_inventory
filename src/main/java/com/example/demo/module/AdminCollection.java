@@ -2,6 +2,7 @@ package com.example.demo.module;
 
 import com.example.demo.DatabaseConnection;
 import javafx.application.Application;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.sql.*;
 import java.util.ArrayList;
@@ -103,5 +104,37 @@ public class AdminCollection {
             e.printStackTrace();
         }
     }
+    public List<Admin> searchAdmin(TextField keyword) {
+        List<Admin> searchResults = new ArrayList<>();
+        String query = "SELECT * FROM admin WHERE  admin_id LIKE ? OR name LIKE ? OR email LIKE ? OR address LIKE ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String value = "%" + keyword.getText() + "%";
+            preparedStatement.setString(1, value);
+            preparedStatement.setString(2, value);
+            preparedStatement.setString(3, value);
+            preparedStatement.setString(4, value);
+
+
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Admin admin  = new Admin(
+                        resultSet.getInt("admin_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("address"),
+                        resultSet.getString("phone")
+
+                );
+                searchResults.add(admin);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
+    }
+
 
 }
