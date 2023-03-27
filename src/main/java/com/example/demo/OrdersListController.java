@@ -53,7 +53,9 @@ private Button Back;
     OrdersCollection ordersCollection = new OrdersCollection();
     public void initialize()  {load();
 
-        filter.setItems(FXCollections.observableArrayList("Pending","Shipped","Delivered"));
+        filter.setItems(FXCollections.observableArrayList("All", "Pending", "Shipped", "Delivered"));
+        filter.setValue("All");
+
         sort.setItems(FXCollections.observableArrayList("Newest","Oldest"));
         sort.setValue("Newest");
     }
@@ -82,8 +84,13 @@ private void handleBack(ActionEvent event ) throws IOException {
 
     }
     public void handleFilterByStatus(ActionEvent event) {
-        String statues = (String) filter.getValue(); // get the selected status from the combo box
-        List<Orders> filteredOrders = ordersCollection.filterOrdersByStatus(statues);
+        String status = (String) filter.getValue();
+        List<Orders> filteredOrders;
+        if (status.equals("All")) {
+            filteredOrders = ordersCollection.getAllOrders(); // load all orders
+        } else {
+            filteredOrders = ordersCollection.filterOrdersByStatus(status);
+        }
         ObservableList<Orders> data = FXCollections.observableArrayList(filteredOrders);
         table.setItems(data);
     }

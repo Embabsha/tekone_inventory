@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,8 +46,9 @@ public class ProductsController {
     @FXML private TableColumn<Products, Double> colYear;
     @FXML private TableColumn<Products, Integer> colQuantity;
     @FXML private TableColumn<Products, Double> colPrice;
-    //@FXML private TableColumn<Products, ImageView> colImage;
-    //@FXML private ImageView productImage;
+    @FXML private TableColumn<Products, String> colImage;
+
+    @FXML private ImageView imageView;
     @FXML private  Button search;
     @FXML private TextField searchField;
     @FXML private ComboBox filter;
@@ -162,7 +164,14 @@ private void handleAdd(ActionEvent event) throws IOException {
         colBrand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
         colPrice.setCellValueFactory(cell -> cell.getValue().getPriceProperty().asObject());
         colQuantity.setCellValueFactory(cell -> cell.getValue().getQuantityProperty().asObject());
-     //   colImage.setCellValueFactory(new PropertyValueFactory<>("photo"));
+       // Image image = new Image("/Applications/XAMPP/xamppfiles/htdocs/tekone/img/Unknown.jpeg") ;
+       // image.setImage(image);
+
+       // public void imageView(ActionEvent event){
+         //   Image image = new Image("/Applications/XAMPP/xamppfiles/htdocs/tekone/img/"+tableProducts.getSelectionModel().getSelectedItems().getProduct().getImageFilePath()) ;
+          //  image.setIMage(image);
+
+      //  }
 
         ProductsCollection productsCollection = new ProductsCollection();
         ArrayList<Products> products = new ArrayList<>(productsCollection.getAllProducts());

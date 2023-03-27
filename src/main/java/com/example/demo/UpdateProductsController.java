@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -32,6 +33,8 @@ public class UpdateProductsController {
     //@FXML private Image ImageField;
     @FXML private TextField priceField;
     @FXML private TextField quantityField;
+    @FXML private ImageView imageField;
+
 
 
     private Products products;
@@ -53,7 +56,13 @@ public class UpdateProductsController {
         yearField.setText(String.valueOf(products.getYear()));
         priceField.setText(String.valueOf(products.getPrice()));
         quantityField.setText(String.valueOf(products.getQuantity()));
+        //Image image = new Image(products.getImage());
+        //setImage(image);
 
+
+    }
+    public void setImage(Image image) {
+        imageField.setImage(image);
     }
 
 
@@ -79,8 +88,11 @@ public class UpdateProductsController {
         Double year = Double.valueOf(yearField.getText());
         Double price = Double.valueOf(priceField.getText());
         Integer quantity = Integer.valueOf(quantityField.getText());
+        //Image image = imageField.getImage();
+        //String imageUrl = image.getUrl();
 
         Products updateProducts = new Products(products.getProductId(), name, description, type, brand, year, quantity, price);
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Products Updated");
