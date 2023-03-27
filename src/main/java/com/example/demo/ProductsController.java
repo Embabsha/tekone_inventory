@@ -9,15 +9,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,7 +40,7 @@ public class ProductsController {
     private Button Back;
 
     @FXML
-    private TableView<Products> tableProducts;
+    TableView<Products> tableProducts;
     @FXML private TableColumn<Products, Integer> colProductId;
     @FXML private TableColumn<Products, String> colName;
     @FXML private TableColumn<Products, String> colDescription;
@@ -51,7 +54,8 @@ public class ProductsController {
     @FXML private ImageView imageView;
     @FXML private  Button search;
     @FXML private TextField searchField;
-    @FXML private ComboBox filter;
+    @FXML
+    ComboBox filter;
     Connection connection;
     ProductsCollection productsCollection = new ProductsCollection();
 
@@ -94,19 +98,28 @@ public class ProductsController {
 
     }
     @FXML
-    private void handleBack(ActionEvent event ) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
     }
 
 @FXML
 private void handleAdd(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
     Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(new Scene(root));
     stage.show();
 
@@ -164,20 +177,39 @@ private void handleAdd(ActionEvent event) throws IOException {
         colBrand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
         colPrice.setCellValueFactory(cell -> cell.getValue().getPriceProperty().asObject());
         colQuantity.setCellValueFactory(cell -> cell.getValue().getQuantityProperty().asObject());
-       // Image image = new Image("/Applications/XAMPP/xamppfiles/htdocs/tekone/img/Unknown.jpeg") ;
-       // image.setImage(image);
+        colImage.setCellValueFactory(cell -> cell.getValue().getImageProperty());
 
-       // public void imageView(ActionEvent event){
-         //   Image image = new Image("/Applications/XAMPP/xamppfiles/htdocs/tekone/img/"+tableProducts.getSelectionModel().getSelectedItems().getProduct().getImageFilePath()) ;
-          //  image.setIMage(image);
+        // set a cell factory to display the image as an ImageView
 
-      //  }
 
         ProductsCollection productsCollection = new ProductsCollection();
         ArrayList<Products> products = new ArrayList<>(productsCollection.getAllProducts());
         ObservableList<Products> data = FXCollections.observableArrayList(products);
 
         tableProducts.setItems(data);
+        colImage.setCellFactory(col -> new TableCell<Products, String>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String imagePath, boolean empty) {
+                super.updateItem(imagePath, empty);
+                if (empty || imagePath == null) {
+                    setGraphic(null);
+                } else {
+                    try {
+                        // set the image using the image path
+                        Image image = new Image(new File(imagePath).toURI().toString());
+                        imageView.setImage(image);
+                        imageView.setFitWidth(100); // set the width to 125 pixels
+                        imageView.setFitHeight(100); // set the height to 125 pixels
+                        imageView.setPreserveRatio(true); // preserve the aspect ratio of the image
+                        setGraphic(imageView);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
 
     }

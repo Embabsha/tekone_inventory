@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -61,16 +62,23 @@ private Button Back;
     }
 
 
-@FXML
-private void handleBack(ActionEvent event ) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-    Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
-    stage.setScene(new Scene(root));
-    stage.show();
-
-
-}
+    @FXML
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
+    }
     public void handelSortByDate(ActionEvent event){
         sort.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.equals("Newest")) {
@@ -107,7 +115,7 @@ private void handleBack(ActionEvent event ) throws IOException {
 private void handleAdd(ActionEvent event) throws IOException{
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddOrders.fxml"));
     Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(new Scene(root));
     stage.show();
 

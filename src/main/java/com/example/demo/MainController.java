@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainController {
     @FXML
     private Button products;
     @FXML
@@ -27,17 +27,17 @@ public class MainController implements Initializable {
     private Button customer;
     @FXML
     private void handleProducts(ActionEvent event) throws Exception {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductsList.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductsList.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
     @FXML
     private void handleCustomer(ActionEvent event) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerList.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
 
@@ -46,7 +46,7 @@ public class MainController implements Initializable {
     private void handleOrders(ActionEvent event) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrdersList.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
 
@@ -55,7 +55,7 @@ public class MainController implements Initializable {
     private void handleAdmin(ActionEvent event) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminList.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.showAndWait();
 
@@ -64,15 +64,12 @@ public class MainController implements Initializable {
     private void handleMenu(ActionEvent event) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MenuList.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.showAndWait();
 
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-    }
 }

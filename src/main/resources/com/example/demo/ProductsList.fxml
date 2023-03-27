@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -46,19 +45,19 @@
             </Button>
          </children>
       </VBox>
-      <ScrollPane layoutX="143.0" layoutY="5.0" prefHeight="393.0" prefWidth="456.0">
+      <ScrollPane layoutX="143.0" layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="393.0" prefWidth="456.0">
          <content>
-            <TableView fx:id="tableProducts" prefHeight="400.0">
+            <TableView fx:id="tableProducts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="700.0">
                <columns>
-                  <TableColumn fx:id="colProductId" prefWidth="75.0" text="Product_id" />
-                  <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
-                  <TableColumn fx:id="colDescription" prefWidth="75.0" text="Description" />
-                  <TableColumn fx:id="colType" prefWidth="75.0" text="Type" />
-                  <TableColumn fx:id="colBrand" prefWidth="75.0" text="Brand" />
-                  <TableColumn fx:id="colYear" prefWidth="75.0" text="Year" />
-                  <TableColumn fx:id="colQuantity" prefWidth="75.0" text="Quantity" />
-                  <TableColumn fx:id="colPrice" prefWidth="75.0" text="Price" />
-                  <TableColumn fx:id="colImage" prefWidth="75.0" text="Image" />
+                  <TableColumn fx:id="colProductId" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Product_id" />
+                  <TableColumn fx:id="colName" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="colDescription" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Description" />
+                  <TableColumn fx:id="colType" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="colBrand" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Brand" />
+                  <TableColumn fx:id="colYear" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Year" />
+                  <TableColumn fx:id="colQuantity" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="colPrice" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Price" />
+                  <TableColumn fx:id="colImage" maxWidth="1.7976931348623157E308" prefWidth="90.0" text="Image" />
 
                   
                </columns>
@@ -68,6 +67,5 @@
       <TextField fx:id="searchField" layoutX="626.0" layoutY="11.0" prefHeight="26.0" prefWidth="183.0" />
       <Button fx:id="search" layoutX="821.0" layoutY="12.0" mnemonicParsing="false" onAction="#handelSearch" prefHeight="26.0" prefWidth="63.0" text="Search" />
       <ComboBox fx:id="filter" layoutX="626.0" layoutY="50.0" onAction="#handleFilterByStatus" prefWidth="200.0" promptText="Filter Brand:" />
-      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="271.0" layoutX="622.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

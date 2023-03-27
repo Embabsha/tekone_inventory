@@ -1,22 +1,18 @@
 package com.example.demo;
 
-import com.example.demo.module.Admin;
-import com.example.demo.module.AdminCollection;
-import com.example.demo.module.Products;
-import com.example.demo.module.ProductsCollection;
+import com.example.demo.module.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -27,6 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 public class AdminListController  {
 @FXML
@@ -50,14 +47,23 @@ private Button Back;
 
 public void initialize()  {load();}
 
-@FXML
-private void handleBack(ActionEvent event ) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-    Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
-    stage.setScene(new Scene(root));
-    stage.show();
-}
+    @FXML
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
+    }
     public void handelSearch(ActionEvent event) throws IOException{
         AdminCollection adminCollection = new AdminCollection();
         ArrayList<Admin> admins = new ArrayList<>(adminCollection.searchAdmin(searchField));
@@ -71,7 +77,7 @@ private void handleBack(ActionEvent event ) throws IOException {
 private void handleAdd(ActionEvent event) throws IOException{
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddAdmin.fxml"));
     Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(new Scene(root));
     stage.show();
 
@@ -99,18 +105,25 @@ private void handleDelete(ActionEvent event) throws IOException{
     table.refresh();
 
     }
-@FXML
-private void handleUpdate(ActionEvent event) throws IOException{
-    System.out.println(table.getSelectionModel().getSelectedItem());
-    final UpdateAdminController updateadmincontroller = new UpdateAdminController(table.getSelectionModel().getSelectedItem());
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateAdmin.fxml"));
-    fxmlLoader.setController(updateadmincontroller);
-    Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
-    stage.initModality(Modality.APPLICATION_MODAL);
-    stage.setScene(new Scene(root));
-    stage.show();
-
+    @FXML
+    private void handleUpdate() throws IOException {
+        Admin selectedAdmin = table.getSelectionModel().getSelectedItem();
+        if (selectedAdmin == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Customer selected");
+            alert.setContentText("Please select a Customer from the table.");
+            alert.showAndWait();
+            return;
+        }
+        final UpdateAdminController updateadmincontroller = new UpdateAdminController(selectedAdmin);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateAdmin.fxml"));
+        fxmlLoader.setController(updateadmincontroller);
+        Parent root =(Parent) fxmlLoader.load();
+        updateadmincontroller.setTable(table);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
 @FXML

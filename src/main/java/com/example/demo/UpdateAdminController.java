@@ -2,10 +2,12 @@ package com.example.demo;
 
 import com.example.demo.module.Admin;
 import com.example.demo.module.AdminCollection;
+import com.example.demo.module.Products;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -87,6 +89,9 @@ public class UpdateAdminController  {
 
 
 
+    public void setTable(TableView<Admin> table) {
+        this.table = table;
+    }
 
 
 
@@ -104,12 +109,21 @@ public class UpdateAdminController  {
     }
 
     @FXML
-    private void handleBack(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminList.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminList.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
     }
 
 

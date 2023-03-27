@@ -1,21 +1,16 @@
 package com.example.demo;
 
-import com.example.demo.module.Admin;
-import com.example.demo.module.AdminCollection;
-import com.example.demo.module.Customer;
-import com.example.demo.module.CustomersCollection;
+import com.example.demo.module.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -57,12 +52,21 @@ public class CustomerListController {
     }
 
     @FXML
-    private void handleBack(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
     }
 
     public void handelSearch(ActionEvent event) throws IOException{
@@ -77,7 +81,7 @@ public class CustomerListController {
     private void handleAdd(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCustomer.fxml"));
         Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -106,18 +110,26 @@ public class CustomerListController {
     }
 
     @FXML
-    private void handleUpdate(ActionEvent event) throws IOException {
-        System.out.println(table.getSelectionModel().getSelectedItem());
-        final UpdateCustomerController updateCustomerController = new UpdateCustomerController(table.getSelectionModel().getSelectedItem());
+    private void handleUpdate() throws IOException {
+        Customer selectedCustomer = table.getSelectionModel().getSelectedItem();
+        if (selectedCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Customer selected");
+            alert.setContentText("Please select a Customer from the table.");
+            alert.showAndWait();
+            return;
+        }
+        final UpdateCustomerController updatecustomercontroller = new UpdateCustomerController(selectedCustomer);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateCustomer.fxml"));
-        fxmlLoader.setController(updateCustomerController);
-        Parent root = (Parent) fxmlLoader.load();
+        fxmlLoader.setController(updatecustomercontroller);
+        Parent root =(Parent) fxmlLoader.load();
+        updatecustomercontroller.setTable(table);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(root));
         stage.show();
-    }
 
+    }
     @FXML
     public void load() {
         colCustomerId.setCellValueFactory(cell -> cell.getValue().getCustomerIdProperty().asObject());

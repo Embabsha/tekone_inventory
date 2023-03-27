@@ -4,19 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba3174a5-f63a-4938-aa41-6eb096fe84e3" name="Changes" comment="adding date field , adding sort, filter and search bar functions adn adding extra charts">
+    <list default="true" id="ba3174a5-f63a-4938-aa41-6eb096fe84e3" name="Changes" comment="final touches">
+      <change afterPath="$PROJECT_DIR$/src/test/java/AddCustomersControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/CustomerListControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AddAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/AddAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AddCustomersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/AddCustomersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AddOrdersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/AddOrdersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AddProductsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/AddProductsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AddReportsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/AdminListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/AdminListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/CustomerChartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/CustomerChartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/CustomerListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/CustomerListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/MenuListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/MenuListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/OrdersListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/OrdersListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/ProductsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/ProductsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/StockChartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/StockChartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateOrdersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateOrdersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateProductsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateProductsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/UpdateReportController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/OrdersCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/OrdersCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/Products.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/ProductsCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/ProductsCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/AddProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/AddProduct.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/ProductsList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/ProductsList.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/UpdateProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/UpdateProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,23 +71,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_directory_selection": "/Applications/XAMPP/xamppfiles/htdocs/tekone/src/main/java/com/example/demo",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/tekone/src/main/java/com/example/demo&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.demo" />
     </key>
@@ -150,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679762278180</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="final touches">
+      <created>1679878381877</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679878381891</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -172,6 +199,22 @@
     <MESSAGE value="updates on the product side and the orders side" />
     <MESSAGE value="some update in old class , also completing the report part showing bar charts from the database" />
     <MESSAGE value="adding date field , adding sort, filter and search bar functions adn adding extra charts" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding date field , adding sort, filter and search bar functions adn adding extra charts" />
+    <MESSAGE value="final touches" />
+    <option name="LAST_COMMIT_MESSAGE" value="final touches" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/demo/MainController.java</url>
+          <line>45</line>
+          <properties class="com.example.demo.MainController" method="handleOrders">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

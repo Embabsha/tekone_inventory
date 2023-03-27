@@ -5,24 +5,19 @@ import com.example.demo.module.ProductsCollection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.util.Base64;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -53,6 +48,7 @@ public class AddProductsController {
     private Button btnSinglerFile;
     @FXML
     private Label labelSingleFile;
+     List<String> lsFile;
 
     private ProductsCollection productsCollection = new ProductsCollection();
 
@@ -69,7 +65,21 @@ public class AddProductsController {
         double year = Double.parseDouble(yearField.getText());
         int quantity = Integer.parseInt(quantityField.getText());
         double price = Double.parseDouble(priceField.getText());
-        String image = imageString.getText();
+        String image = "";
+        if (labelSingleFile.getText() != null && !labelSingleFile.getText().isEmpty()) {
+            String filePath = labelSingleFile.getText().substring(labelSingleFile.getText().indexOf("::") + 2);
+            File file = new File(filePath);
+            if (file.exists() && lsFile.contains(file.getName().substring(file.getName().lastIndexOf(".")))) {
+                image = filePath;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid file type selected. Please select a .jpeg file.");
+                alert.showAndWait();
+                return;
+            }
+        }
         // Create a new Products object
         Products products = new Products(0, name, description, type, brand, year, quantity, price, image);
 
@@ -91,6 +101,7 @@ public class AddProductsController {
         yearField.clear();
         quantityField.clear();
         priceField.clear();
+        labelSingleFile.setText("");
     }
 
 
@@ -98,13 +109,17 @@ public class AddProductsController {
    @FXML
    private void singelFileChooser(ActionEvent event){
     FileChooser  fc = new FileChooser();
-    fc.getExtensionFilters().add( new FileChooser.ExtensionFilter("jpeg Files",".jpeg"));
+    fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.jpeg"));
     File f = fc.showOpenDialog(null);
     if(f != null){
-        labelSingleFile
+        labelSingleFile.setText("Select File ::" + f.getAbsolutePath());
     }
 
 
+   }
+   public void initialize(){
+        lsFile = new ArrayList<>();
+        lsFile.add(".jpeg");
    }
 
 
@@ -121,16 +136,25 @@ private  void handleClear(ActionEvent event){
     yearField.clear();
     quantityField.clear();
     priceField.clear();
-
+    labelSingleFile.setText("");
 }
 
     @FXML
-    private void handleBack(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductsList.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductsList.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
     }
 
 

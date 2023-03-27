@@ -43,16 +43,33 @@ public class OrdersCollection {
                 return;
             }
 
+            // Check if the quantity ordered is less than or equal to the available quantity in the database
+            int availableQuantity = productResult.getInt("quantity");
+            int orderedQuantity = orders.getQuantity();
+
+            if (orderedQuantity > availableQuantity) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Insufficient quantity available");
+                alert.showAndWait();
+                return;
+            }
+
             // Calculate order total
             double price = productResult.getDouble("price");
-            int quantity = orders.getQuantity();
-            double total = price * quantity;
+            double total = price * orderedQuantity;
+
+            // Update the quantity of the product in the database
+            int updatedQuantity = availableQuantity - orderedQuantity;
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE product SET quantity = ? WHERE product_id = ?");
+            updateStatement.setInt(1, updatedQuantity);
+            updateStatement.setInt(2, orders.getProductId());
+            updateStatement.executeUpdate();
 
             // Insert order into orders table
             PreparedStatement orderStatement = connection.prepareStatement(orderQuery);
             orderStatement.setInt(1, orders.getProductId());
             orderStatement.setInt(2, orders.getCustomerId());
-            orderStatement.setInt(3, quantity);
+            orderStatement.setInt(3, orderedQuantity);
             orderStatement.setDouble(4, total);
             orderStatement.setString(5, orders.getStatues());
             orderStatement.setInt(6, orders.getAdminId());

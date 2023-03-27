@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import java.time.LocalDate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,11 +17,9 @@ import javafx.stage.Stage;
 import java.util.Date;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.*;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class AddOrdersController {
     @FXML private TextField customerIdField;
@@ -159,15 +158,23 @@ private  void handleClear(ActionEvent event){
 
 }
 
-@FXML
-private void handleBack(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrdersList.fxml"));
-    Parent root = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
-    stage.setScene(new Scene(root));
-    stage.show();
-
-}
+    @FXML
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrdersList.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
+    }
 
 
 }

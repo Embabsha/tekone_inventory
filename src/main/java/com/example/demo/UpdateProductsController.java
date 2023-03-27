@@ -6,17 +6,19 @@ import com.example.demo.module.ProductsCollection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateProductsController {
     @FXML
@@ -33,7 +35,7 @@ public class UpdateProductsController {
     //@FXML private Image ImageField;
     @FXML private TextField priceField;
     @FXML private TextField quantityField;
-    @FXML private ImageView imageField;
+    @FXML private Label imageLabel;
 
 
 
@@ -42,6 +44,8 @@ public class UpdateProductsController {
     private TableView<Products> tableProducts;
 
     private ProductsCollection productCollection;
+
+    List<String> lsFile;
 
     public UpdateProductsController(Products products){
         this.products = products;
@@ -56,14 +60,16 @@ public class UpdateProductsController {
         yearField.setText(String.valueOf(products.getYear()));
         priceField.setText(String.valueOf(products.getPrice()));
         quantityField.setText(String.valueOf(products.getQuantity()));
-        //Image image = new Image(products.getImage());
-        //setImage(image);
+        imageLabel.setText(String.valueOf(products.getImage()));
+
+
+
+        lsFile = new ArrayList<>();
+        lsFile.add(".jpeg");
 
 
     }
-    public void setImage(Image image) {
-        imageField.setImage(image);
-    }
+
 
 
     public void setProducts(Products products){
@@ -78,6 +84,7 @@ public class UpdateProductsController {
         yearField.setText(String.valueOf(products.getYear()));
         priceField.setText(String.valueOf(products.getPrice()));
         quantityField.setText(String.valueOf(products.getQuantity()));
+        imageLabel.setText(String.valueOf(products.getImage()));
 
     }
     public void handleUpdate() {
@@ -88,10 +95,25 @@ public class UpdateProductsController {
         Double year = Double.valueOf(yearField.getText());
         Double price = Double.valueOf(priceField.getText());
         Integer quantity = Integer.valueOf(quantityField.getText());
-        //Image image = imageField.getImage();
+        String image = imageLabel.getText();
         //String imageUrl = image.getUrl();
 
-        Products updateProducts = new Products(products.getProductId(), name, description, type, brand, year, quantity, price);
+        if (imageLabel.getText() != null && !imageLabel.getText().isEmpty()) {
+            String filePath = imageLabel.getText().substring(imageLabel.getText().indexOf("::") + 2);
+            File file = new File(filePath);
+            if (file.exists() && lsFile.contains(file.getName().substring(file.getName().lastIndexOf(".")))) {
+                image = filePath;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid file type selected. Please select a .jpeg file.");
+                alert.showAndWait();
+                return;
+            }
+        }
+
+        Products updateProducts = new Products(products.getProductId(), name, description, type, brand, year, quantity, price, image);
 
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -106,12 +128,21 @@ public class UpdateProductsController {
     }
 
     @FXML
-    private void handleBack(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductsList.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+    private void handleBack(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductsList.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Unable to load main.fxml");
+            alert.setContentText("Please try again later.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -124,12 +155,24 @@ public class UpdateProductsController {
         yearField.clear();
         typeField.clear();
         brandField.clear();
+        imageLabel.setText("");
     }
 
+    @FXML
+    public void updateImage(ActionEvent event){
+        FileChooser  fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.jpeg"));
+        File f = fc.showOpenDialog(null);
+        if(f != null){
+            imageLabel.setText("Select File ::" + f.getAbsolutePath());
+        }
+
+    }
 
     public void setTable(TableView<Products> tableProducts) {
         this.tableProducts = tableProducts;
     }
+
 
 
 }

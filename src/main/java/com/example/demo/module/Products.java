@@ -6,7 +6,15 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.net.URL;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -159,6 +167,20 @@ public class Products {
         this.price.set(price);
     }
     //  public void setImage(Blob image) {this.image = image;}
+
+    public String getImagePath() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            return selectedFile.getAbsolutePath();
+        } else {
+            return null;
+        }
+    }
+
 
 
 }

@@ -29,9 +29,9 @@ public class ProductsCollection {
 
 
     public void addProducts(Products products) {
-        String query = "INSERT INTO product (name, description, type, brand, year, quantity, price,image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO product (name, description, type, brand, year, quantity, price, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, products.getName());
             preparedStatement.setString(2, products.getDescription());
             preparedStatement.setString(3, products.getType());
@@ -40,19 +40,17 @@ public class ProductsCollection {
             preparedStatement.setInt(6, products.getQuantity());
             preparedStatement.setDouble(7, products.getPrice());
             preparedStatement.setString(8, products.getImage());
-            //preparedStatement.setBlob(8, products.getImage());
+
             int rowsInserted = preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-
                 int productsId = generatedKeys.getInt(1);
                 products.setProductId(productsId);
-
             }
-        }catch(SQLException e){
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Products> getAllProducts() {
@@ -99,7 +97,7 @@ public class ProductsCollection {
 
 
     public void updateProducts(int productId, Products products) {
-        String query = "UPDATE product SET name=?, description=?, type=?, brand=?, year=?, quantity=?, price=? WHERE product_id=?";
+        String query = "UPDATE product SET name=?, description=?, type=?, brand=?, year=?, quantity=?, price=? , image = ? WHERE product_id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, products.getName());
@@ -109,8 +107,8 @@ public class ProductsCollection {
             preparedStatement.setDouble(5, products.getYear());
             preparedStatement.setInt(6, products.getQuantity());
             preparedStatement.setDouble(7, products.getPrice());
-           // if (products.getImage() != null) {preparedStatement.setBlob(8, new SerialBlob(products.getImage()));} else {preparedStatement.setNull(8, Types.BLOB);}
-            preparedStatement.setInt(8, productId);
+            preparedStatement.setString(8,products.getImage());
+            preparedStatement.setInt(9, productId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
