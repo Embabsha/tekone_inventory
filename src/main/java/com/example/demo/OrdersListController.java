@@ -120,6 +120,7 @@ private void handleAdd(ActionEvent event) throws IOException{
     stage.show();
 
 }
+
 @FXML
 private void handleDelete(ActionEvent event) throws IOException{
     ObservableList<Orders> selectedItems = table.getSelectionModel().getSelectedItems();
@@ -132,15 +133,30 @@ private void handleDelete(ActionEvent event) throws IOException{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, orders.getOrderId());
             preparedStatement.executeUpdate();
+
+            // Update product quantity in database
+            int productId = orders.getProductId();
+            int quantity = orders.getQuantity();
+            String updateQuery = "UPDATE product SET quantity = quantity + ? WHERE product_id = ?";
+            PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+            updateStatement.setInt(1, quantity);
+            updateStatement.setInt(2, productId);
+            updateStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Refresh the table view
+// Refresh the table view
     table.getItems().removeAll(selectedItems);
     table.refresh();
 
+// Show alert message
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Order Canceled");
+    alert.setHeaderText(null);
+    alert.setContentText("The selected orders have been canceled and the quantities returned to the stock.");
+    alert.showAndWait();
 
 
 }

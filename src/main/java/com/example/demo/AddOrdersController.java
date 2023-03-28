@@ -43,98 +43,105 @@ private Connection connection = this.connection = DatabaseConnection.getInstance
     private List<Orders> ordersList;
 
 
-@FXML
-private void handleAdd(ActionEvent event) throws IOException, SQLException {
+    @FXML
+    private void handleAdd(ActionEvent event) throws IOException, SQLException {
 
-    String statues = statuesField.getText();
-    int customerId = Integer.parseInt(customerIdField.getText());
-    int productId = Integer.parseInt(productIdField.getText());
-    int quantity = Integer.parseInt(quantityField.getText());
-    int adminId =Integer.parseInt(adminIdField.getText());
-    Double total= Double.parseDouble(totalField.getText());
-    Date date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        String statues = statuesField.getText();
+        int customerId = Integer.parseInt(customerIdField.getText());
+        int productId = Integer.parseInt(productIdField.getText());
+        int quantity = Integer.parseInt(quantityField.getText());
+        int adminId =Integer.parseInt(adminIdField.getText());
+        Double total= Double.parseDouble(totalField.getText());
+        Date date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-    if (!statues.equals("shipped") && !statues.equals("delivered") && !statues.equals("pending")) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Invalid Statues");
+        if (!statues.equals("shipped") && !statues.equals("delivered") && !statues.equals("pending")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Statues");
+            alert.setHeaderText(null);
+            alert.setContentText("The statues entered is not valid. Please enter either 'shipped', 'delivered', or 'pending'.");
+            alert.showAndWait();
+            return;
+        }
+        // Check if product exists in products table
+        String productQuery = "SELECT * FROM product WHERE product_id = ?";
+
+        try {
+            PreparedStatement productStatement = connection.prepareStatement(productQuery);
+            productStatement.setInt(1, productId);
+            ResultSet productResult = productStatement.executeQuery();
+
+            if (!productResult.next()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Product Not Found");
+                alert.setHeaderText(null);
+                alert.setContentText("The product ID entered does not exist.");
+                alert.showAndWait();
+                return;
+            }
+            int availableQuantity = productResult.getInt("quantity");
+            if (quantity > availableQuantity) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Insufficient Quantity");
+                alert.setHeaderText(null);
+                alert.setContentText("The quantity entered is more than the available quantity of the product.");
+                alert.showAndWait();
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+        // Check if customer exists in customers table
+        String customerQuery = "SELECT * FROM customers WHERE customer_id = ?";
+
+        try {
+            PreparedStatement customerStatement = connection.prepareStatement(customerQuery);
+            customerStatement.setInt(1, customerId);
+            ResultSet customerResult = customerStatement.executeQuery();
+
+            if (!customerResult.next()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Customer Not Found");
+                alert.setHeaderText(null);
+                alert.setContentText("The customer ID entered does not exist.");
+                alert.showAndWait();
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+        // Check if admin exists in admin table
+
+        String adminQuery = "SELECT * FROM admin WHERE admin_id = ?";
+
+        try {
+            PreparedStatement adminStatement = connection.prepareStatement(adminQuery);
+            adminStatement.setInt(1, adminId);
+            ResultSet adminResult = adminStatement.executeQuery();
+
+            if (!adminResult.next()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Admin Not Found");
+                alert.setHeaderText(null);
+                alert.setContentText("The admin ID entered does not exist.");
+                alert.showAndWait();
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Orders orders = new Orders(0, productId, customerId, quantity, total, statues, adminId, date);
+
+        ordersCollection.addOrders(orders);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Orders Added");
         alert.setHeaderText(null);
-        alert.setContentText("The statues entered is not valid. Please enter either 'shipped', 'delivered', or 'pending'.");
+        alert.setContentText("The orders have been added to the database.");
         alert.showAndWait();
-        return;
-    }
-// Check if product exists in products table
-    String productQuery = "SELECT * FROM product WHERE product_id = ?";
-
-
-    try {
-        PreparedStatement productStatement = connection.prepareStatement(productQuery);
-        productStatement.setInt(1, productId);
-        ResultSet productResult = productStatement.executeQuery();
-
-        if (!productResult.next()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Product Not Found");
-            alert.setHeaderText(null);
-            alert.setContentText("The product ID entered does not exist.");
-            alert.showAndWait();
-            return;
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return;
-    }
-
-// Check if customer exists in customers table
-    String customerQuery = "SELECT * FROM customers WHERE customer_id = ?";
-
-    try {
-        PreparedStatement customerStatement = connection.prepareStatement(customerQuery);
-        customerStatement.setInt(1, customerId);
-       ResultSet customerResult = customerStatement.executeQuery();
-
-        if (!customerResult.next()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Customer Not Found");
-            alert.setHeaderText(null);
-            alert.setContentText("The customer ID entered does not exist.");
-            alert.showAndWait();
-            return;
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return;
-    }
-    // Check if admin exists in admin table
-
-    String adminQuery = "SELECT * FROM admin WHERE admin_id = ?";
-
-    try {
-        PreparedStatement adminStatement = connection.prepareStatement(adminQuery);
-        adminStatement.setInt(1, adminId);
-       ResultSet adminResult = adminStatement.executeQuery();
-
-        if (!adminResult.next()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("admin Not Found");
-            alert.setHeaderText(null);
-            alert.setContentText("The admin ID entered does not exist.");
-            alert.showAndWait();
-            return;
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return;
-    }
-
-    Orders orders = new Orders(0, productId, customerId, quantity, total, statues, adminId, date);
-
-    ordersCollection.addOrders(orders);
-
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Orders Added");
-    alert.setHeaderText(null);
-    alert.setContentText("The orders have been added to the database.");
-    alert.showAndWait();
 
     customerIdField.clear();
     productIdField.clear();
