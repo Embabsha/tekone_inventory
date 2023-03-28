@@ -47,7 +47,7 @@
       </VBox>
       <ScrollPane layoutX="143.0" layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="393.0" prefWidth="456.0">
          <content>
-            <TableView fx:id="tableProducts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="700.0">
+            <TableView fx:id="tableProducts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="550.0" prefWidth="720.0">
                <columns>
                   <TableColumn fx:id="colProductId" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Product_id" />
                   <TableColumn fx:id="colName" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Name" />
@@ -57,7 +57,7 @@
                   <TableColumn fx:id="colYear" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Year" />
                   <TableColumn fx:id="colQuantity" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Quantity" />
                   <TableColumn fx:id="colPrice" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Price" />
-                  <TableColumn fx:id="colImage" maxWidth="1.7976931348623157E308" prefWidth="90.0" text="Image" />
+                  <TableColumn fx:id="colImage" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Image" />
 
                   
                </columns>

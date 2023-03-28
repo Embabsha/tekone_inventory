@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.module.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -131,7 +132,11 @@ public void load() {
     colAdmin.setCellValueFactory(cell -> cell.getValue().getAdminIdProperty().asObject());
     colName.setCellValueFactory(cell -> cell.getValue().getNameProperty());
     colEmail.setCellValueFactory(cell -> cell.getValue().getEmailProperty());
-    colPassword.setCellValueFactory(cell -> cell.getValue().getPasswordProperty());
+    colPassword.setCellValueFactory(cell -> {
+        String password = cell.getValue().getPassword();
+        String asterisks = "*".repeat(password.length());
+        return new SimpleStringProperty(asterisks);
+    });
     colAddress.setCellValueFactory(cell -> cell.getValue().getAddressProperty());
     colPhone.setCellValueFactory(cell -> cell.getValue().getPhoneProperty());
 
