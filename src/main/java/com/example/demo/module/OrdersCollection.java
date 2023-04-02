@@ -109,36 +109,7 @@ public class OrdersCollection {
 
 
 
-    public void deleteOrders(int order_id) {
-        String query = "SELECT * FROM orders WHERE order_id = ?";
-        try {
-            PreparedStatement selectStatement = connection.prepareStatement(query);
-            selectStatement.setInt(1, order_id);
-            ResultSet result = selectStatement.executeQuery();
-            if(result.next()) {
-                int productId = result.getInt("product_id");
-                int orderQuantity = result.getInt("quantity");
-                String updateQuery = "UPDATE product SET quantity = quantity + ? WHERE product_id = ?";
-                PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
-                updateStatement.setInt(1, orderQuantity);
-                updateStatement.setInt(2, productId);
-                updateStatement.executeUpdate();
-            }
 
-            String deleteQuery = "DELETE FROM orders WHERE order_id = ?";
-            PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
-            deleteStatement.setInt(1, order_id);
-            deleteStatement.executeUpdate();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Order Cancelled");
-            alert.setHeaderText(null);
-            alert.setContentText("The order has been cancelled and the product quantity has been updated.");
-            alert.showAndWait();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 
@@ -198,6 +169,36 @@ public class OrdersCollection {
             e.printStackTrace();
         }
         return searchResults;
+    }
+    public void deleteOrders(int order_id) {
+        String query = "SELECT * FROM orders WHERE order_id = ?";
+        try {
+            PreparedStatement selectStatement = connection.prepareStatement(query);
+            selectStatement.setInt(1, order_id);
+            ResultSet result = selectStatement.executeQuery();
+            if(result.next()) {
+                int productId = result.getInt("product_id");
+                int orderQuantity = result.getInt("quantity");
+                String updateQuery = "UPDATE product SET quantity = quantity + ? WHERE product_id = ?";
+                PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+                updateStatement.setInt(1, orderQuantity);
+                updateStatement.setInt(2, productId);
+                updateStatement.executeUpdate();
+            }
+
+            String deleteQuery = "DELETE FROM orders WHERE order_id = ?";
+            PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
+            deleteStatement.setInt(1, order_id);
+            deleteStatement.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Order Cancelled");
+            alert.setHeaderText(null);
+            alert.setContentText("The order has been cancelled and the product quantity has been updated.");
+            alert.showAndWait();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

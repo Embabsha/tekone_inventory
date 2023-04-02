@@ -31,29 +31,30 @@ public class CustomersCollection  {
 
 
 
-        public void addCustomer(Customer customer) {
-            String query = "INSERT INTO customers (name, email, password, address, phone) VALUES (?, ?, ?, ?, ?)";
-            try {
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, customer.getName());
-                preparedStatement.setString(2, customer.getEmail());
-                preparedStatement.setString(3, customer.getPassword());
-                preparedStatement.setString(4, customer.getAddress());
-                preparedStatement.setString(5, customer.getPhone());
-                int rowsInserted = preparedStatement.executeUpdate();
+    public void addCustomer(Customer customer) {
+        String query = "INSERT INTO customers (name, email, password, address, phone) VALUES (?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, customer.getName());
+            preparedStatement.setString(2, customer.getEmail());
+            preparedStatement.setString(3, customer.getPassword());
+            preparedStatement.setString(4, customer.getAddress());
+            preparedStatement.setString(5, customer.getPhone());
+            int rowsInserted = preparedStatement.executeUpdate();
 
-                // get the auto-generated customer_id value
-                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    int customerId = generatedKeys.getInt(1);
-                    customer.setCustomerId(customerId);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            // get the auto-generated customer_id value
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int customerId = generatedKeys.getInt(1);
+                customer.setCustomerId(customerId);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
 
-        public List<Customer> getAllCustomers() {
+
+    public List<Customer> getAllCustomers() {
             try {
                 Connection connection = DatabaseConnection.getInstance().getConnection();
                 resultSet = connection.createStatement().executeQuery("SELECT * FROM customers");
@@ -96,7 +97,7 @@ public class CustomersCollection  {
 
     public List<Customer> searchCustomer(TextField keyword) {
         List<Customer> searchResults = new ArrayList<>();
-        String query = "SELECT * FROM customer WHERE  customer_id LIKE ? OR name LIKE ? OR email LIKE ? OR address LIKE ?";
+        String query = "SELECT * FROM customers WHERE  customer_id LIKE ? OR name LIKE ? OR email LIKE ? OR address LIKE ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             String value = "%" + keyword.getText() + "%";

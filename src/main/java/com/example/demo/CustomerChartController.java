@@ -62,14 +62,17 @@ public class CustomerChartController {
             barChart.setData(FXCollections.observableArrayList(new XYChart.Series<>("Quantities", barChartData)));
 
             // Iterate through the result set and add the data to the observable list
-            while (resultSet.next()) {
+            int count = 0;
+            while (resultSet.next() && count < 5) {
                 String customerId = resultSet.getString("customer_id");
                 int quantity = resultSet.getInt("totalQuantity");
                 XYChart.Data<String, Number> data = new XYChart.Data<>(customerId, quantity);
                 data.setNode(new CustomerChartController.HoveredThresholdNode(customerId, quantity));
                 data.getNode().setStyle("-fx-bar-fill: #0000FF;");
                 barChartData.add(data);
+                count++;
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();

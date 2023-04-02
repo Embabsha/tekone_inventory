@@ -33,7 +33,7 @@ public class AdminCollection {
     public void addAdmin(Admin admin) {
         String query = "INSERT INTO admin (name, email, password, address, phone) VALUES (?, ?, ?, ?, ?)";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, admin.getName());
             preparedStatement.setString(2, admin.getEmail());
             preparedStatement.setString(3, admin.getPassword());
@@ -51,6 +51,7 @@ public class AdminCollection {
             e.printStackTrace();
         }
     }
+
 
 
 

@@ -40,6 +40,7 @@ public class ProductsController {
     private Button Back;
 
     @FXML
+    public
     TableView<Products> tableProducts;
     @FXML private TableColumn<Products, Integer> colProductId;
     @FXML private TableColumn<Products, String> colName;
@@ -56,7 +57,7 @@ public class ProductsController {
     @FXML private TextField searchField;
     @FXML
     ComboBox filter;
-    Connection connection;
+    public Connection connection;
     ProductsCollection productsCollection = new ProductsCollection();
 
     public void initialize() throws SQLException { load();
@@ -74,6 +75,27 @@ public class ProductsController {
         observableBrandList.addAll(brandList);
         filter.setItems(observableBrandList);
 
+    }
+
+    @FXML
+    public void handleDelete(ActionEvent event) throws IOException {
+        // Get the selected items from the table view
+        ObservableList<Products> selectedItems = tableProducts.getSelectionModel().getSelectedItems();
+
+        // Iterate over the selected items and delete them from the database
+        for (Products products : selectedItems) {
+            String query = "DELETE FROM product WHERE product_id = ?";
+            try {
+                Connection connection = DatabaseConnection.getInstance().getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, products.getProductId());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        tableProducts.getItems().removeAll(selectedItems);
+        tableProducts.refresh();
     }
 
     public void handleFilterByStatus(ActionEvent event) {
@@ -124,26 +146,7 @@ private void handleAdd(ActionEvent event) throws IOException {
     stage.show();
 
 }
-    @FXML
-    private void handleDelete(ActionEvent event) throws IOException {
-        // Get the selected items from the table view
-        ObservableList<Products> selectedItems = tableProducts.getSelectionModel().getSelectedItems();
 
-        // Iterate over the selected items and delete them from the database
-        for (Products products : selectedItems) {
-            String query = "DELETE FROM product WHERE product_id = ?";
-            try {
-                Connection connection = DatabaseConnection.getInstance().getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setInt(1, products.getProductId());
-                preparedStatement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        tableProducts.getItems().removeAll(selectedItems);
-        tableProducts.refresh();
-    }
 
     @FXML
     private void handleUpdate() throws IOException {

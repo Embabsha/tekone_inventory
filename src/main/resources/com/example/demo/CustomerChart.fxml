@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CustomerChartController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CustomerChartController">
    <children>
       <Button fx:id="ordersList" layoutX="4.0" layoutY="150.0" mnemonicParsing="false" onAction="#handelOrders" prefHeight="32.0" prefWidth="98.0" text="OrderList">
          <padding>
@@ -20,7 +20,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <BarChart fx:id="barChart" layoutX="92.0" layoutY="55.0" prefHeight="333.0" prefWidth="500.0">
+      <BarChart fx:id="barChart" layoutX="109.0" layoutY="55.0" prefHeight="426.0" prefWidth="575.0">
         <xAxis>
           <CategoryAxis fx:id="caProducts" label="Products" side="BOTTOM" />
         </xAxis>
