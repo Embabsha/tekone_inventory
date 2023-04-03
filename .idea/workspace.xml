@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba3174a5-f63a-4938-aa41-6eb096fe84e3" name="Changes" comment="final touches">
-      <change afterPath="$PROJECT_DIR$/src/test/java/AdminCollectionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/CustomersCollectionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/OrdersCollectionTest.java" afterDir="false" />
+    <list default="true" id="ba3174a5-f63a-4938-aa41-6eb096fe84e3" name="Changes" comment="final project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/CustomerChartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/CustomerChartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/ProductsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/ProductsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/AdminCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/AdminCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/CustomersCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/CustomersCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/module/OrdersCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/module/OrdersCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/CustomerChart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/CustomerChart.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/AddCustomersControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CustomerListControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestUpdateProduct.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/package-info.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680004598641</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="final project">
+      <created>1680448973914</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1680448973914</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,7 +239,8 @@
     <MESSAGE value="some update in old class , also completing the report part showing bar charts from the database" />
     <MESSAGE value="adding date field , adding sort, filter and search bar functions adn adding extra charts" />
     <MESSAGE value="final touches" />
-    <option name="LAST_COMMIT_MESSAGE" value="final touches" />
+    <MESSAGE value="final project" />
+    <option name="LAST_COMMIT_MESSAGE" value="final project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
